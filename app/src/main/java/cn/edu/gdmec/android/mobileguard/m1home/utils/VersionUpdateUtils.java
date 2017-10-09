@@ -1,31 +1,34 @@
-package cn.edu.gdmec.android.mobileguard.m1home.utils;
+ package cn.edu.gdmec.android.mobileguard.m1home.utils;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.widget.Switch;
-import android.widget.Toast;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.cookie.PublicSuffixDomainFilter;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.IOException;
+        import android.app.Activity;
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.os.Handler;
+        import android.os.Message;
+        import android.util.Log;
+        import android.widget.Toast;
 
-import cn.edu.gdmec.android.mobileguard.R;
-import cn.edu.gdmec.android.mobileguard.m1home.entity.VersionEntity;
+        import org.apache.http.HttpEntity;
+        import org.apache.http.HttpResponse;
+        import org.apache.http.client.HttpClient;
+        import org.apache.http.client.methods.HttpGet;
+        import org.apache.http.impl.client.DefaultHttpClient;
+        import org.apache.http.params.HttpConnectionParams;
+        import org.apache.http.util.EntityUtils;
+        import org.json.JSONException;
+        import org.json.JSONObject;
+
+        import java.io.IOException;
+
+        import cn.edu.gdmec.android.mobileguard.R;
+        import cn.edu.gdmec.android.mobileguard.m1home.HomeActivity;
+        import cn.edu.gdmec.android.mobileguard.m1home.entity.VersionEntity;
 
 /**
- * Created by Administrator on 2017/9/24.
+ * Created by Administrator on 2017/9/17.
  */
-//获取版本号 对比版本号 下载更新
+//获取版本号  对比版本号  下载更新
 public class VersionUpdateUtils {
     private static final int MESSAGE_IO_ERROR = 102;//网络错误代号
     private static final int MESSAGE_JSON_ERROR = 103;//JSON错误代号
@@ -34,81 +37,128 @@ public class VersionUpdateUtils {
     private String mVersion;
     private Activity context;
     private VersionEntity versionEntity;
-
-    private Handler handler = new Handler(){
+    //handler
+    private Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg){
-            switch (msg.what){
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
                 case MESSAGE_IO_ERROR:
-                    Toast.makeText(context,"IO错误",Toast.LENGTH_LONG).show();
-                    //测试后，网络错误也进入主界面
-                    Intent intent1 = new Intent(context,HomeActivity.class);
+                    Toast.makeText(context, "IO错误", Toast.LENGTH_LONG).show();
+                    //测试用 网络错误也进入主界面
+                    Intent intent1 = new Intent(context, HomeActivity.class);
                     context.startActivity(intent1);
                     context.finish();
                     break;
                 case MESSAGE_JSON_ERROR:
-                    Toast.makeText(context,"JSON解析错误",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "JSON解析错误", Toast.LENGTH_LONG).show();
                     break;
                 case MESSAGE_SHOW_ERROR:
-                   //显示升级对话框
-                   showUpdateDialog(versionEntity);
+//显示升级对话框
+                    showUpdateDialog(versionEntity);
                     break;
                 case MESSAGE_ENTERHOME:
-                    Intent intent =  new Intent(context,HomeActivity.class);
+                    Intent intent = new Intent(context, HomeActivity.class);
                     context.startActivity(intent);
                     context.finish();
 
+                    break;
+
             }
         }
-
     };
 
-    public VersionUpdateUtils(String mVersion,Activity context){
+    /**
+     *
+     * @param mVersion
+     * @param context
+     */
+    public VersionUpdateUtils(String mVersion, Activity context) {
         this.mVersion = mVersion;
         this.context = context;
     }
-    public void getCloudVersion(){
+
+    public void getCloudVersion() {
         try {
-            HttpClient httpclient = new DefaultHttpClient();
+            HttpClient httpClient = new DefaultHttpClient();
             //设置超时
-            HttpConnectionParams.setConnectionTimeout(httpclient.getParams(),5000);
-            HttpConnectionParams.setSoTimeout(httpclient.getParams(),5000);
-            //请求链接
+            HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 5000);
+            HttpConnectionParams.setSoTimeout(httpClient.getParams(), 5000);
+//            请求链接
             HttpGet httpGet = new HttpGet("http://android2017.duapp.com/updateinfo.html");
-            //执行
-            HttpResponse execute = httpclient.execute(httpGet);
-            //比对返回码200位成功
-            if (execute.getStatusLine().getStatusCode()==200){
-                //获取服务器返回的内容并处理
+//            执行
+            HttpResponse execute = httpClient.execute(httpGet);
+//            比对返回码 200 为成功
+            if (execute.getStatusLine().getStatusCode() == 200) {
+//                获取服务器返回的内容并处理
                 HttpEntity httpEntity = execute.getEntity();
-                String result = EntityUtils.toString(httpEntity,"utf-8");
+                String result = EntityUtils.toString(httpEntity, "utf-8");
                 JSONObject jsonObject = new JSONObject(result);
                 versionEntity = new VersionEntity();
                 versionEntity.versioncode = jsonObject.getString("code");
                 versionEntity.description = jsonObject.getString("des");
                 versionEntity.apkurl = jsonObject.getString("apkurl");
-                if (!mVersion.equals(versionEntity.versioncode)){
-                    //版本不同，需要升级
-//                    System.out.println(versionEntity.description);
-//                    DownloadUtils downloadUtils = new DownloadUtils();
-//                    downloadUtils.downloadApk(versionEntity.apkurl,"mobileguard.apk",context);
+                Log.d("Tag", "getCloudVersion 本地版本为: " + mVersion);
+                if (!mVersion.equals(versionEntity.versioncode)) {
+                    //版本不同 需升级
+//                    Toast.makeText(context, versionEntity.description, Toast.LENGTH_SHORT).show();
                     handler.sendEmptyMessage(MESSAGE_SHOW_ERROR);
-                }else{
+                }else {
                     enterHome();
                 }
+
             }
-        }catch (IOException e){
-            //io异常
+
+        } catch (IOException e) {
+//            io异常
+            handler.sendEmptyMessage(MESSAGE_IO_ERROR);
             e.printStackTrace();
-        }catch (JSONException e){
-            //json异常
+        } catch (JSONException e) {
+//            json异常
+            handler.sendEmptyMessage(MESSAGE_JSON_ERROR);
             e.printStackTrace();
         }
+
+
     }
-    private void showUpdateDialog(final VersionEntity versionEntity){
+
+    /**
+     * 选择是否升级的对话框
+     * @param versionEntity 网络版本号
+     */
+    private void showUpdateDialog(final VersionEntity versionEntity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("检查到有新版本："+versionEntity.versioncode);
+        builder.setTitle("检查到有新版本：" + versionEntity.versioncode);
+        builder.setCancelable(false);//设置不能被忽视
         builder.setIcon(R.mipmap.ic_launcher_round);
-        builder.setPositiveButton("立即升级",(dialog）
+        builder.setPositiveButton("立即升级", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("Tag", "getCloudVersion 网络版本为: " + versionEntity.versioncode);
+                DownloadUtils downloadUtils = new DownloadUtils();
+                downloadUtils.downloadApk(versionEntity.apkurl, "mobileguard.apk", context);
+                Log.d("Tag", "下载成功");
+                enterHome();
+            }
+        });
+        builder.setNegativeButton("暂不升级", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                enterHome();
+            }
+        });
+        builder.show();
     }
+
+    /**
+     * 通过handler的message进入主界面
+     */
+    private void enterHome() {
+        handler.sendEmptyMessage(MESSAGE_ENTERHOME);
+    }
+    private void downloadNewApk(String apkurl){
+        DownloadUtils downloadUtils = new DownloadUtils();
+        downloadUtils.downloadApk(apkurl,"mobileguard.apk",context);
+    }
+
 }

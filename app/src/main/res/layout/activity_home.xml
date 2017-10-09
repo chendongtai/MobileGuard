@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:layout_weight="2">
         <ImageView
-            android:layout_weight="100dp"
+            android:layout_width="100dp"
             android:layout_height="107dp"
             android:background="@drawable/superman"
             android:scaleType="fitXY"/>

@@ -13,6 +13,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         mVersion = MyUtils.getVersion(getApplicationContext());
         mTvVersion = (TextView) findViewById(R.id.tv_splash_version);
         mTvVersion.setText("版本号："+mVersion);
@@ -24,5 +25,8 @@ public class SplashActivity extends AppCompatActivity {
                 versionUpdateUtils.getCloudVersion();
             }
         }.start();
+
+       System.out.print("niubi");
+
     }
 }
