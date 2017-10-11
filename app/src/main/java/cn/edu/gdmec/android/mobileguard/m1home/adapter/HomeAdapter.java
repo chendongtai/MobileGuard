@@ -7,11 +7,6 @@
         import android.widget.ImageView;
         import android.widget.TextView;
         import cn.edu.gdmec.android.mobileguard.R;
-
-/**
- * Created by Administrator on 2017/9/19.
- */
-
 public class HomeAdapter extends BaseAdapter {
     private Context context;
     int[] imageId = {R.drawable.safe, R.drawable.callmsgsafe, R.drawable.app,
@@ -42,7 +37,7 @@ public class HomeAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view1 = View.inflate(context,R.layout.item_home,null);
-        ImageView iv_icon = (ImageView) view1.findViewById(R.id.iv_icon);
+        ImageView iv_icon = (ImageView) view1.findViewById(R.id.iv_home);
         TextView tv_name = (TextView) view1.findViewById(R.id.tv_name);
         iv_icon.setImageResource(imageId[position]);
         tv_name.setText(names[position]);
