@@ -52,6 +52,7 @@ public class ContactAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder)view.getTag();
         }
+        //aa
 //        for (ContactInfo co:contactInfos) {
 //            Log.d("Tag", "getView: --------------------------"+co.name+"phone:"+co.phone);
 //        }
