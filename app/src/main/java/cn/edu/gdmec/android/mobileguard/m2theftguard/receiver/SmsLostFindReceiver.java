@@ -51,7 +51,7 @@ public class SmsLostFindReceiver extends BroadcastReceiver{
                         player.setVolume(1.0f,1.0f);
                         player.start();
                         abortBroadcast();
-                        //
+                        //、
                     }else if ("#*wipedata*#".equals(body)){
                         Log.i(TAG,"远程清除数据");
                         dpm.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE);
