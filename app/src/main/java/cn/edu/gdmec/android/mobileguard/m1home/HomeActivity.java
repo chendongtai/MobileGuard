@@ -1,11 +1,14 @@
 package cn.edu.gdmec.android.mobileguard.m1home;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.Snackbar;
 import android.support.v4.content.SharedPreferencesCompat;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,12 +23,18 @@ import cn.edu.gdmec.android.mobileguard.m1home.adapter.HomeAdapter;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.LostFindActivity;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.dialog.InterPasswordDialog;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.dialog.SetupPasswordDialog;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.receiver.MyDeviceAdminReceiver;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
 
 public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
     private long mExitTime;
+    //储存手机防盗密码的sp
     private SharedPreferences msharedPreferences;
+    //设备管理员
+    private DevicePolicyManager policyManager;
+    //申请权限
+    private ComponentName componentName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +58,21 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+        //获取设备管理员
+        policyManager = (DevicePolicyManager)getSystemService(DEVICE_POLICY_SERVICE);
+        //本行代码需要“手机防盗模块”完成后才能启用
+        //2.申请权限，MyDeviceAdminReceiver继承自DeviceAdminReceiver
+        componentName = new ComponentName(this, MyDeviceAdminReceiver.class
+        );
+        //3.判断呢，如果没有权限则申请权限
+        boolean active = policyManager.isAdminActive(componentName);
+        if (!active){
+            ///没有管理员的权限，则获取管理员的权限
+            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,componentName);
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,"获取超级管理员的权限，用于远程锁屏和清除数据");
+            startActivity(intent);
+        }
     }
     public void startActivity(Class<?> cls){
         Intent intent = new Intent(HomeActivity.this,cls);

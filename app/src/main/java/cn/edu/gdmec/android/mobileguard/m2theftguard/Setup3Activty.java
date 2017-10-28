@@ -14,7 +14,6 @@ import android.widget.Toast;
 import cn.edu.gdmec.android.mobileguard.R;
 
 public class Setup3Activty extends BaseSetupActivity implements View.OnClickListener{
-
     private EditText mInputPhone;
     @Override
     public void showNext() {
@@ -29,7 +28,6 @@ public class Setup3Activty extends BaseSetupActivity implements View.OnClickList
         editor.commit();
         startActivityAndFinishSelf(Setup4Activty.class);
     }
-
     @Override
     public void showPre() {
         startActivityAndFinishSelf(Setup2Activty.class);
@@ -40,25 +38,19 @@ public class Setup3Activty extends BaseSetupActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup3_activty);
         //设置第三个小圆点的颜色
-        Log.d("Tag", "onCreate:  -------------//设置第三个小圆点的颜色");
         ((RadioButton)findViewById(R.id.rb_third)).setChecked(true);
-
         findViewById(R.id.btn_addcontact).setOnClickListener(this);
         mInputPhone = (EditText) findViewById(R.id.et_inputphone);
         String safephone = sp.getString("safephone",null);
         if (!TextUtils.isEmpty(safephone)){
             mInputPhone.setText(safephone);
         }
-
     }
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_addcontact:
                 //启动联系人选择activity并获取返回值
-                Log.d("Tag", "onClick:---------------------- ContactSelectActivity");
                 startActivityForResult(new Intent(this,ContactSelectActivity.class),0);
                 break;
         }

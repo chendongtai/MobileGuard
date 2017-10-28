@@ -8,17 +8,12 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-/**
- * Created by Administrator on 2017/10/20.
- */
-
 public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
         correctSIM();
     }
-
     public void correctSIM() {
         //检查sim卡是否发生变化
         SharedPreferences sp = getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -32,7 +27,7 @@ public class App extends Application {
             //为了测试在手机序列号上的data 已模拟sim卡被更换的情况
             String realsim = tm.getSimSerialNumber();
             //测试用
-            realsim="999";
+            realsim = "999";
             if (bindsim.equals(realsim)){
                 Log.i("", "correctSIM: sim卡未发生变化，还是您的手机");
             }else{
@@ -44,10 +39,7 @@ public class App extends Application {
                     smsManager.sendTextMessage(safenumber,null,"你的亲友手机的SIM卡已经被更换！",null,null);
 
                 }
-
-
             }
-
         }
     }
 }
