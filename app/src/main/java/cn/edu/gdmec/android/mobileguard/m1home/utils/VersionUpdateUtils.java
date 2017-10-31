@@ -99,6 +99,7 @@ public class VersionUpdateUtils {
                 versionEntity.apkurl = jsonObject.getString("apkurl");
                 Log.d("Tag", "getCloudVersion 本地版本为: " + mVersion);
                 if (!mVersion.equals(versionEntity.versioncode)) {
+                    //子线程告诉主线程是否执行，告诉handler发送消息队列，等handler
                     //版本不同 需升级
 //                    Toast.makeText(context, versionEntity.description, Toast.LENGTH_SHORT).show();
                     handler.sendEmptyMessage(MESSAGE_SHOW_ERROR);

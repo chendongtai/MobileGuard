@@ -82,19 +82,14 @@
             android:background="@drawable/arrow_right" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.0px"
-        android:background="#10000000"
-    />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="30dp"
-        android:orientation="vertical"
-    >
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -102,19 +97,20 @@
             android:gravity="center"
             android:text="短信指令功能简介"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-        />
+            android:textSize="16sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:text="#*alarm*#"
-                android:textColor="@color/purple"
-            />
+                android:textColor="@color/purple" />
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentLeft="true"
@@ -125,17 +121,19 @@
                 android:text="播放报警音乐"
                 android:textColor="@color/purple" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:text="#*location*#"
-                android:textColor="@color/purple"
-            />
+                android:textColor="@color/purple" />
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentLeft="true"
@@ -144,20 +142,21 @@
                 android:drawableLeft="@drawable/location_icon_small"
                 android:drawablePadding="5dp"
                 android:text="GPS追踪"
-                android:textColor="@color/purple"
-            />
+                android:textColor="@color/purple" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:text="#*lockScreen*#"
-                android:textColor="@color/purple"
-            />
+                android:textColor="@color/purple" />
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentLeft="true"
@@ -166,20 +165,21 @@
                 android:drawableLeft="@drawable/lock_screen_icon_small"
                 android:drawablePadding="5dp"
                 android:text="远程锁屏"
-                android:textColor="@color/purple"
-            />
+                android:textColor="@color/purple" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:text="#*wipedata*#"
-                android:textColor="@color/purple"
-            />
+                android:textColor="@color/purple" />
+
             <TextView
                 style="@style/textview16sp"
                 android:layout_alignParentLeft="true"
@@ -188,12 +188,16 @@
                 android:drawableLeft="@drawable/delete_data_small"
                 android:drawablePadding="5dp"
                 android:text="远程删除数据"
-                android:textColor="@color/purple"
-            />
+                android:textColor="@color/purple" />
         </RelativeLayout>
 
 
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:background="#10000000"
+    />
 
 </LinearLayout>

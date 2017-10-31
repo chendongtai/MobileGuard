@@ -84,8 +84,5 @@
         android:gravity="center"
     >
         <include layout="@layout/setup_radiogroup"/>
-
     </LinearLayout>
-
-
 </LinearLayout>

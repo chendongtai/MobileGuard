@@ -1,5 +1,4 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.Window;
 import android.widget.Toast;
 
 import cn.edu.gdmec.android.mobileguard.R;
-
 public abstract class BaseSetupActivity extends AppCompatActivity {
     public SharedPreferences sp;
     //手势识别类
