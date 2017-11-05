@@ -34,7 +34,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
 //        dao = new BlackNumberDao(SecurityPhoneActivity.this);
         totalNumber = dao.getTotalNumber();
         if (totalNumber == 0){
-            //数据库中没有黑名单数据
+            //数据库中没有黑名单数据a
             mHaveBlackNumber.setVisibility(View.GONE);
             mNoBlackNumber.setVisibility(View.VISIBLE);
 
@@ -80,7 +80,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
                     //SCROLL_STATE_TOUCH_SCROOL  列表滚动后静止
 
                     case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-                        //获取最后一个可见条目
+                        //获取最后一个可见条目aaa
                         int lastVisiblePosition = mListView.getLastVisiblePosition();
                         //如果当前条目是最后一个 增查询更多数据
                         if (lastVisiblePosition == pageBlackNumber.size() -1){
