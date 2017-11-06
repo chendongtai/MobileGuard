@@ -20,7 +20,7 @@ public class LostFindActivity extends AppCompatActivity {
         Intent intent = new Intent(LostFindActivity.this,Setup1Activty.class);
         startActivity(intent);
         //    this.finish();
-
+//98
 
     }
 }
