@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <!--手机防盗模块需要用到 2017.10.13-->
+    <!--手机防盗模块需要用到-->
     <color name="purple">#5542B8</color>
+    <color name="bright_purple">#C21809</color>
+    <color name="light_gary">#D1D0CE</color>
 </resources>
