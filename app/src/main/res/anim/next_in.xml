@@ -5,6 +5,5 @@
         android:fromDegress="0"
         android:pivotX="0"
         android:pivotY="0"
-
         android:toDegrees="0"/>
 </set>
