@@ -40,9 +40,7 @@ public class BlackNumberDao {
         }else{
             return true;
         }
-
     }
-
     /**
      * 删除数据
      * @param blackContactInfo

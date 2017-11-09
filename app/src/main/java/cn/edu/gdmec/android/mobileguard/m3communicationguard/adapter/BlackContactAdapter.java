@@ -6,9 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
-
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContactInfo;
@@ -17,7 +15,7 @@ public class BlackContactAdapter extends BaseAdapter {
     private List<BlackContactInfo> contactInfos;
     private Context context;
     private BlackNumberDao dao;
-    private BlackConactCallBack callBack;
+    private BlackContactCallBack callBack;
 
     class ViewHolder{
         TextView mNameTV;
@@ -25,10 +23,10 @@ public class BlackContactAdapter extends BaseAdapter {
         View mContactImgv;
         View mDeleteView;
     }
-    public interface BlackConactCallBack{
+    public interface BlackContactCallBack{
         void DataSizeChanged();
     }
-    public void setCallBack(BlackConactCallBack callBack){
+    public void setCallBack(BlackContactCallBack callBack){
         this.callBack = callBack;
 
     }
