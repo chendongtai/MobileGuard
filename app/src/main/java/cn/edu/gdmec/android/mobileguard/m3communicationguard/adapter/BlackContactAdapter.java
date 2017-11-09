@@ -16,7 +16,6 @@ public class BlackContactAdapter extends BaseAdapter {
     private Context context;
     private BlackNumberDao dao;
     private BlackContactCallBack callBack;
-
     class ViewHolder{
         TextView mNameTV;
         TextView mModeTV;
@@ -40,17 +39,14 @@ public class BlackContactAdapter extends BaseAdapter {
     public int getCount() {
         return contactInfos.size();
     }
-
     @Override
     public Object getItem(int position) {
         return contactInfos.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return position;
     }
-
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder holder = null;

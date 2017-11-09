@@ -11,16 +11,16 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 import cn.edu.gdmec.android.mobileguard.R;
 public class LostFindActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView mSafePhonrTV;
+    private TextView mSafePhoneTV;
     private RelativeLayout mInterSetupRL;
-    private SharedPreferences msharePreferences;
+    private SharedPreferences msharedPreferences;
     private ToggleButton mToggleButton;
     private TextView mProtectStatusTV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_find);
-        msharePreferences = getSharedPreferences("config",MODE_PRIVATE);
+        msharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
         if (!isSetUp()){
             //如果没有进入设置向导，则进入
             startSetUpActivity();
@@ -28,7 +28,7 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
         initView();
     }
     private boolean isSetUp(){
-        return msharePreferences.getBoolean("isSetUp",false);
+        return msharedPreferences.getBoolean("isSetUp",false);
     }
     public void initView(){
         TextView mTitleTV = (TextView)findViewById(R.id.tv_title);
@@ -37,14 +37,14 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
         mLeftImgv.setOnClickListener(this);
         mLeftImgv.setImageResource(R.drawable.back);
         findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.purple));
-        mSafePhonrTV = (TextView)findViewById(R.id.tv_safephone);
-        mSafePhonrTV.setText(msharePreferences.getString("safephone",""));
+        mSafePhoneTV = (TextView)findViewById(R.id.tv_safephone);
+        mSafePhoneTV.setText(msharedPreferences.getString("safephone",""));
         mToggleButton = (ToggleButton)findViewById(R.id.togglebtn_lostfind);
         mInterSetupRL = (RelativeLayout)findViewById(R.id.rl_inter_setup_wizard);
         mInterSetupRL.setOnClickListener(this);
         mProtectStatusTV = (TextView)findViewById(R.id.tv_lostfind_protectstauts);
         //查询手机防盗是否开启，默认为开启
-        boolean protecting = msharePreferences.getBoolean("protecting",true);
+        boolean protecting = msharedPreferences.getBoolean("protecting",true);
         if (protecting){
             mProtectStatusTV.setText("防盗保护已经开启");
             mToggleButton.setChecked(true);
@@ -60,7 +60,7 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
                 }else{
                     mProtectStatusTV.setText("防盗保护没有开启");
                 }
-                SharedPreferences.Editor editor = msharePreferences.edit();
+                SharedPreferences.Editor editor = msharedPreferences.edit();
                 editor.putBoolean("protecting",isChecked);
                 editor.commit();
             }
@@ -75,7 +75,6 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.rl_inter_setup_wizard:
-
                 //重新进入设置向导
                 startSetUpActivity();
             case R.id.imgv_leftbtn:
