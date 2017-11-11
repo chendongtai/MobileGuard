@@ -27,7 +27,7 @@
         android:textColor="@color/purple"
     />
     <TextView
-        android:id="@+id/et_blacknumbertype"
+        android:id="@+id/tv_black_type"
         style="@style/textview14sp"
         android:layout_alignTop="@id/view_black_icon"
         android:layout_toRightOf="@id/view_black_icon"
