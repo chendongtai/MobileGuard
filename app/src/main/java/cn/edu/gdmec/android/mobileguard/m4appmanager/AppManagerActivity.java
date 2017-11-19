@@ -25,7 +25,6 @@ import cn.edu.gdmec.android.mobileguard.m4appmanager.adapter.AppManagerAdapter;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.utils.AppInfoParser;
 
-
 public class AppManagerActivity extends AppCompatActivity implements View.OnClickListener {
     /*手机剩余内纯的Textviwe*/
     private TextView mPhoneMemoryTV;
@@ -56,8 +55,6 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
             }
         }
     };
-
-
 
     class UninstallRececiver extends BroadcastReceiver{
         @Override
@@ -129,7 +126,6 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     private void getMemoryFromPhone(){
         long avail_sd = Environment.getExternalStorageDirectory().getFreeSpace();
         long avail_rom = Environment.getDataDirectory().getFreeSpace();
-
         String str_avail_sd = Formatter.formatFileSize(this,avail_sd);
         String str_avail_rom = Formatter.formatFileSize(this,avail_rom);
         mPhoneMemoryTV.setText("剩余手机内存"+str_avail_rom);
@@ -166,7 +162,6 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
                         }
                     }.start();
                 }
-
             }
         });
 
@@ -180,8 +175,6 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
             public void onScroll(AbsListView view, int i, int visibleItemCount, int totalItemCount) {
                 if(i >= userAppInfos.size()+1){
                     mAppNumTV.setText("系统程序："+systemAppInfos.size()+"个");
-
-
                 }else {
                     mAppNumTV.setText("用户程序："+userAppInfos.size()+"个");
                 }

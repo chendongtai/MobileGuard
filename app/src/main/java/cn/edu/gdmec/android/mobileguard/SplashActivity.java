@@ -15,12 +15,13 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        getSupportActionBar().hide();
        //读xml分析，把xml的布局 对象new出来，自动把东西自动创建完。各个xx都变成对象
         mVersion = MyUtils.getVersion(getApplicationContext());
         mTvVersion = (TextView) findViewById(R.id.tv_splash_version);
         //把tv_splash_version取出来之后，实例化
         mTvVersion.setText("版本号："+mVersion);
-        final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(mVersion,SplashActivity.this);
+       // final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(mVersion,SplashActivity.this);
 //        new Thread(){
 //         //用户ui主线程不允许网络访问，造成app挂起，造成app卡死。例如不能打电话之类的
 //            @Override
