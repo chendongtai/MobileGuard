@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         mTvVersion = (TextView) findViewById(R.id.tv_splash_version);
         //把tv_splash_version取出来之后，实例化
         mTvVersion.setText("版本号："+mVersion);
-       // final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(mVersion,SplashActivity.this);
+        final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(mVersion,SplashActivity.this);
 //        new Thread(){
 //         //用户ui主线程不允许网络访问，造成app挂起，造成app卡死。例如不能打电话之类的
 //            @Override
@@ -31,8 +31,7 @@ public class SplashActivity extends AppCompatActivity {
 //                //versionUpdateUtils类，处在线程的位置
 //            }
 //        }.start();
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, HomeActivity.class));
         finish();
        /* protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

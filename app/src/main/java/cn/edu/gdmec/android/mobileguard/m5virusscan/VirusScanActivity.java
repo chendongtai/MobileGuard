@@ -2,11 +2,11 @@ package cn.edu.gdmec.android.mobileguard.m5virusscan;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,8 +22,8 @@ import cn.edu.gdmec.android.mobileguard.m1home.utils.VersionUpdateUtils;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 
 public class VirusScanActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView mLastTimeTV;
     private TextView mDbVersionTV;
+    private TextView mLastTimeTV;
     private SharedPreferences mSP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,30 +33,22 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         copyDB("antivirus.db","");
         initView();
     }
-
     @Override
     protected void onResume() {
-        String string = mSP.getString("lastVirusScan","您还没有查杀病毒！");
+        String string = mSP.getString("lastVirusScan","您还没有查杀病毒");
         mLastTimeTV.setText(string);
         super.onResume();
     }
-
-    /**
-     * 拷贝病毒数据库
-     * @param //String
-     */
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-                        AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
-                        String dbVersion = dao.getVirusDbVersion();
-                        mDbVersionTV = (TextView) findViewById(R.id.tv_dbversion);
-                        mDbVersionTV.setText("病毒数据库版本:"+dbVersion);
-                        UpdateDb(dbVersion);
-                        super.handleMessage(msg);
-                    }
+            AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
+            String dbVersion = dao.getVirusDbVersion();
+            mDbVersionTV.setText("病毒数据库版本:"+dbVersion);
+            UpdateDb(dbVersion);
+            super.handleMessage(msg);
+        }
     };
-
     VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
         @Override
         public void afterDownload(String filename) {
@@ -71,17 +63,20 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
                 versionUpdateUtils.getCloudVersion("http://android2017.duapp.com/virusupdateinfo.html");
             }
         }.start();
-
     }
-    private void copyDB(final String dbname,final String fromPath) {
-    //大文件的拷贝复制一定要用线程，否则很容易出现ANR -》activity not response出现活动未响应
+    /**
+     * 拷贝病毒数据库
+     * @param dbname
+     */
+    private void copyDB(final String dbname,  final String fromPath) {
+        //大文件的拷贝复制一定要用线程，否则很容易出现ANR
         new Thread(){
-            public void run(){
-                try{
+            public void run() {
+                handler.sendEmptyMessage(0);
+                try {
                     File file = new File(getFilesDir(),dbname);
-                    if (file.exists() && file.length() > 0 && fromPath.equals("")){
-                        Log.i("VirusScanActivity","数据库已存在！");
-                        handler.sendEmptyMessage(0);
+                    if (file.exists()&&file.length()>0&&fromPath.equals("")){
+                        Log.i("Tag", "VirusScanActivity: 数据库已存在！");
                         return;
                     }
                     InputStream is;
@@ -94,30 +89,31 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
                     FileOutputStream fos = openFileOutput(dbname,MODE_PRIVATE);
                     byte[] buffer = new byte[1024];
                     int len = 0;
-                    while((len = is.read(buffer)) != -1){
-                        fos.write(buffer, 0 , len);
+                    while((len = is.read(buffer))!=-1){
+                        fos.write(buffer,0,len);
                     }
                     is.close();
                     fos.close();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             };
         }.start();
     }
+
     /**
      * 初始化UI控件
      */
-    private void initView(){
-        findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.light_blue));
-        ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
+    private void initView() {
+        findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.blue));
+        ImageView mLeftImagv = (ImageView) findViewById(R.id.imgv_leftbtn);
         ((TextView)findViewById(R.id.tv_title)).setText("病毒查杀");
-        mLeftImgv.setOnClickListener(this);
-        mLeftImgv.setImageResource(R.drawable.back);
+        mLeftImagv.setOnClickListener(this);
+        mLeftImagv.setImageResource(R.drawable.back);
+        mDbVersionTV = (TextView) findViewById(R.id.tv_dbversion);
         mLastTimeTV = (TextView) findViewById(R.id.tv_lastscantime);
         findViewById(R.id.rl_allscanvirus).setOnClickListener(this);
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){

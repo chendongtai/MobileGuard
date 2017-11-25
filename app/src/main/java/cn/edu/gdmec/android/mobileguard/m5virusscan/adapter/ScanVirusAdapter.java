@@ -30,28 +30,31 @@ public class ScanVirusAdapter extends BaseAdapter {
     public int getCount() {
         return mScanAppInfos.size();
     }
+
     @Override
     public Object getItem(int i) {
         return mScanAppInfos.get(i);
     }
+
     @Override
     public long getItemId(int i) {
         return i;
     }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
         if (view == null){
-            view = View.inflate(context,R.layout.item_list_applock,null);
+            view = View.inflate(context, R.layout.item_list_applock, null);
             holder = new ViewHolder();
             holder.mAppIconImgv = (ImageView) view.findViewById(R.id.imgv_appicon);
-            holder.mAppNameTV = (TextView)view.findViewById(R.id.tv_appname);
+            holder.mAppNameTV = (TextView) view.findViewById(R.id.tv_appname);
             holder.mScanIconImgv = (ImageView) view.findViewById(R.id.imgv_lock);
             view.setTag(holder);
         }else{
             holder = (ViewHolder) view.getTag();
         }
-       ScanAppInfo scanAppInfo = mScanAppInfos.get(i);
+        ScanAppInfo scanAppInfo = mScanAppInfos.get(i);
         if (!scanAppInfo.isVirus){
             holder.mScanIconImgv.setBackgroundResource(R.drawable.blue_right_icon);
             holder.mAppNameTV.setTextColor(context.getResources().getColor(R.color.black));
