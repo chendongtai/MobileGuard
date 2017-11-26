@@ -13,9 +13,6 @@ import java.util.List;
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m6cleancache.entity.CacheInfo;
 
-/**
- * Created by Administrator on 2017/11/24.
- */
 
 public class CacheCleanAdapter extends BaseAdapter {
     private Context context;

@@ -60,15 +60,18 @@
 
             </LinearLayout>
         </FrameLayout>
+        
         <FrameLayout
             android:id="@+id/fl_finishclean"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

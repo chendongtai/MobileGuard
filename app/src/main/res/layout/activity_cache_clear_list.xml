@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:background="@color/light_rose_red">
+
         <ImageView
             android:id="@+id/imgv_broom"
             android:layout_width="80dp"
@@ -15,6 +16,7 @@
             android:layout_centerInParent="true"
             android:background="@drawable/broom_animation"
         />
+
         <TextView
             android:id="@+id/tv_recommend_clean"
             style="@style/textview12sp"
@@ -42,8 +44,8 @@
         android:id="@+id/lv_scancache"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10">
-    </ListView>
+        android:layout_weight="10"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

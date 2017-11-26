@@ -57,7 +57,7 @@ public class CacheClearListActivity extends AppCompatActivity implements View.On
                     //ListView刷新
                     adapter.notifyDataSetChanged();
                     mCacheLV.setSelection(mCacheInfos.size());
-                    break;
+                break;
                 case FINISH:
                     //扫描完了 动画停止
                     animation.stop();

@@ -484,7 +484,7 @@ public class ExampleInstrumentedTest {
         }
     }
 
-    @Test
+    //@Test
     public void t23StopAndRestartScan() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("手机杀毒"));
         result.clickAndWaitForNewWindow();
@@ -497,6 +497,43 @@ public class ExampleInstrumentedTest {
         UiObject result = appList.getChildByText(new UiSelector().className("android.widget.TextView"),"App1(课程测试案例)",true);
         if(!result.exists()){
             throw new Exception("Can't find virus.");
+        }
+    }
+
+   // @Test
+    public void t24EnterCleanCache() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("激活此设备管理员"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("缓存清理"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("缓存扫描"));
+        if(!result.exists()){
+            throw new Exception("Can't enter CacheScanActivity.");
+        }
+    }
+ //   @Test
+    public void t25ScanCache() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("缓存清理"));
+        result.clickAndWaitForNewWindow();
+        sleep(5000);
+        result = mDevice.findObject(new UiSelector().textStartsWith("已扫描"));
+        str = result.getText();
+        System.out.println(str);
+        if(!result.exists()){
+            throw new Exception("Can't enter CacheScanActivity.");
+        }
+    }
+    @Test
+    public void t26CleanCache() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("缓存清理"));
+        result.clickAndWaitForNewWindow();
+        sleep(5000);
+        result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("成功清理"));
+        str = result.getText();
+        if(!result.exists()){
+            throw new Exception("Can't enter CacheScanActivity.");
         }
     }
 }
