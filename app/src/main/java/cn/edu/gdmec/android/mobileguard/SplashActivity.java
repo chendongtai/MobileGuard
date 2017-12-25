@@ -1,48 +1,69 @@
 package cn.edu.gdmec.android.mobileguard;
+
+import android.app.AppOpsManager;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import cn.edu.gdmec.android.mobileguard.m1home.HomeActivity;
 import cn.edu.gdmec.android.mobileguard.m1home.utils.MyUtils;
 import cn.edu.gdmec.android.mobileguard.m1home.utils.VersionUpdateUtils;
 
 public class SplashActivity extends AppCompatActivity {
     private TextView mTvVersion;
     private String mVersion;
+
+    private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1101;
+    //    private Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        getSupportActionBar().hide();
-       //读xml分析，把xml的布局 对象new出来，自动把东西自动创建完。各个xx都变成对象
         mVersion = MyUtils.getVersion(getApplicationContext());
         mTvVersion = (TextView) findViewById(R.id.tv_splash_version);
-        //把tv_splash_version取出来之后，实例化
-        mTvVersion.setText("版本号："+mVersion);
-        final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(mVersion,SplashActivity.this);
-//        new Thread(){
-//         //用户ui主线程不允许网络访问，造成app挂起，造成app卡死。例如不能打电话之类的
-//            @Override
-//            public void run(){
-//                super.run();
-//                versionUpdateUtils.getCloudVersion();
-//                //versionUpdateUtils类，处在线程的位置
-//            }
-//        }.start();
-        startActivity(new Intent(this, HomeActivity.class));
-        finish();
-       /* protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        startActivityAndFinishSelf(HomeActivity.class);
+        mTvVersion.setText("版本号:"+mVersion);
+        if (!hasPermission()){
+            //若用户未开启权限，则引导用户开启“Apps with usage access”权限
+            startActivityForResult (
+                    new Intent ( Settings.ACTION_USAGE_ACCESS_SETTINGS ),
+                    MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS
+            );
         }
-        public void startActivityAndFinishSelf(Class<?> cls) {
-            Intent intent = new Intent(this, cls);
-            startActivity(intent);
-            finish();
-            还有另一种方法，在maifest中修改homeactvity为主界面
-        }*/
+        final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(mVersion,SplashActivity.this);
+        // 开启线程判断网络版本
+        new Thread(){
+            @Override
+            public void run(){
+                super.run();
+                versionUpdateUtils.getCloudVersion();
+            }
+        }.start();
+
+
+
+    }
+    private boolean hasPermission(){
+        AppOpsManager appOps = (AppOpsManager)
+                getSystemService ( APP_OPS_SERVICE );
+        int mode = 0;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
+            mode = appOps.checkOpNoThrow ( AppOpsManager.OPSTR_GET_USAGE_STATS,
+                    android.os.Process.myUid (), getPackageName ());
+        }
+        return mode == AppOpsManager.MODE_ALLOWED;
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data){
+        if (requestCode == MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS){
+            if (!hasPermission ()){
+                startActivityForResult (
+                        new Intent ( Settings.ACTION_USAGE_ACCESS_SETTINGS ),
+                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS
+                );
+            }
+        }
     }
 }

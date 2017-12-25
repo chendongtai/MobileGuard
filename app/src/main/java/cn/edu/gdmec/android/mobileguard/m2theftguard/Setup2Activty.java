@@ -1,7 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -12,9 +11,12 @@ import android.widget.Toast;
 
 import cn.edu.gdmec.android.mobileguard.R;
 
-public class Setup2Activty extends BaseSetupActivity  implements View.OnClickListener{
+public class Setup2Activty extends BaseSetupActivity implements View.OnClickListener {
     private TelephonyManager mTelephonyManager;
     private Button mBindSINBtn;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class Setup2Activty extends BaseSetupActivity  implements View.OnClickLis
             return;
         }
         startActivityAndFinishSelf(Setup3Activty.class);
+
     }
 
     @Override
@@ -49,7 +52,6 @@ public class Setup2Activty extends BaseSetupActivity  implements View.OnClickLis
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_bind_sim:
-                //绑定SIM卡
                 binSIM();
                 break;
         }

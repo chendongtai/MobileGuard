@@ -11,12 +11,19 @@ import java.util.List;
 
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.BlackNumberOpenHelper;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContactInfo;
+
+/**
+ * Created by Administrator on 2017/11/4.
+ */
+
 public class BlackNumberDao {
     private BlackNumberOpenHelper blackNumberOpenHelper;
+
     public BlackNumberDao(Context context){
         super();
         blackNumberOpenHelper = new BlackNumberOpenHelper(context,"blackNumber.db",null,1);
     }
+
     /**
      * 添加数据
      * @param blackContactInfo
@@ -28,6 +35,7 @@ public class BlackNumberDao {
         ContentValues values = new ContentValues();
         if (blackContactInfo.phoneNumber.startsWith("+86")){
             blackContactInfo.phoneNumber = blackContactInfo.phoneNumber.substring(3,blackContactInfo.phoneNumber.length());
+
         }
         values.put("number",blackContactInfo.phoneNumber);
         values.put("name",blackContactInfo.contactName);
@@ -39,7 +47,9 @@ public class BlackNumberDao {
         }else{
             return true;
         }
+
     }
+
     /**
      * 删除数据
      * @param blackContactInfo
@@ -54,6 +64,7 @@ public class BlackNumberDao {
             return true;
         }
     }
+
     /**
      * 分页查询数据库的记录
      * @param pagenumber 第几页页码 从第0页开始

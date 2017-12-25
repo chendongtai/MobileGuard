@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#10000000"
-                android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#10000000"
+    android:orientation="vertical">
     <View
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -17,20 +17,21 @@
         android:layout_alignTop="@id/view_black_icon"
         android:layout_toRightOf="@id/view_black_icon"
         android:textColor="@color/purple"
-    />
+        />
     <TextView
         android:id="@+id/tv_black_mode"
         style="@style/textview14sp"
         android:layout_toRightOf="@id/view_black_icon"
         android:layout_below="@id/tv_black_name"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/purple"
-    />
+        />
     <TextView
         android:id="@+id/tv_black_type"
         style="@style/textview14sp"
-        android:layout_alignTop="@id/view_black_icon"
         android:layout_toRightOf="@id/view_black_icon"
+        android:layout_below="@id/tv_black_mode"
+        android:layout_marginTop="5dp"
         android:textColor="@color/purple"
         />
     <View
@@ -41,5 +42,5 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_centerVertical="true"
-    />
+        />
 </RelativeLayout>

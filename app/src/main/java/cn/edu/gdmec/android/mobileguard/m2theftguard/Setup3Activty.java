@@ -2,10 +2,8 @@ package cn.edu.gdmec.android.mobileguard.m2theftguard;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -28,6 +26,7 @@ public class Setup3Activty extends BaseSetupActivity implements View.OnClickList
         editor.commit();
         startActivityAndFinishSelf(Setup4Activty.class);
     }
+
     @Override
     public void showPre() {
         startActivityAndFinishSelf(Setup2Activty.class);
@@ -39,13 +38,17 @@ public class Setup3Activty extends BaseSetupActivity implements View.OnClickList
         setContentView(R.layout.activity_setup3_activty);
         //设置第三个小圆点的颜色
         ((RadioButton)findViewById(R.id.rb_third)).setChecked(true);
+
         findViewById(R.id.btn_addcontact).setOnClickListener(this);
         mInputPhone = (EditText) findViewById(R.id.et_inputphone);
         String safephone = sp.getString("safephone",null);
         if (!TextUtils.isEmpty(safephone)){
             mInputPhone.setText(safephone);
         }
+
     }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){

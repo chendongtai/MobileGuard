@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.edu.gdmec.android.mobileguard">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="cn.edu.gdmec.android.mobileguard">
 
     <!-- 通讯卫士部分 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -15,7 +16,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+    <!--高级工具程序锁部分-->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+                     tools:ignore="ProtectedPermission"/>
 
     <application
         android:name=".App"
@@ -25,13 +30,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".m1home.HomeActivity">
+        <activity android:name=".SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".m1home.HomeActivity">
+
         </activity>
         <activity android:name=".m2theftguard.LostFindActivity" />
         <activity android:name=".m2theftguard.Setup1Activty" />
@@ -102,16 +109,34 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".m4appmanager.AppManagerActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".m5virusscan.VirusScanSpeedActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".m5virusscan.VirusScanActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".m6cleancache.CacheClearListActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".m6cleancache.CleanCacheActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".m4appmanager.AppManagerActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".m5virusscan.VirusScanSpeedActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".m5virusscan.VirusScanActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".m6cleancache.CacheClearListActivity" />
+        <activity android:name=".m6cleancache.CleanCacheActivity" />
+
+        <receiver
+            android:name=".m8trafficmonitor.reciever.BootCompleteReciever"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".m8trafficmonitor.OperatorSetActivity" />
+        <activity android:name=".m8trafficmonitor.TrafficMonitoringActivity"></activity>
+        <!--m9-->
+        <activity android:name=".m9advancedtools.AdvancedToolsActivity"/>
+        <activity android:name=".m9advancedtools.AppLockActivity"/>
+        <activity android:name=".m9advancedtools.EnterPswActivity"/>
+        <activity android:name=".m9advancedtools.NumBelongtoActivity"/>
+        <activity android:name=".m9advancedtools.SMSBackupActivity"/>
+        <activity android:name=".m9advancedtools.SMSReducitionActivity"/>
+        <service android:name=".m9advancedtools.service.AppLockService"
+                 android:persistent="true"/>
     </application>
 
 </manifest>

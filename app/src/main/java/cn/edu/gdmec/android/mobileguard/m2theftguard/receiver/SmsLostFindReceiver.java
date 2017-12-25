@@ -1,5 +1,4 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard.receiver;
-
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -47,11 +46,10 @@ public class SmsLostFindReceiver extends BroadcastReceiver{
                         abortBroadcast();
                     }else if("#*alarm*#".equals(body)){
                         Log.i(TAG,"播放报警音乐");
-                        MediaPlayer player = MediaPlayer.create(context, R.raw.rfiy);
+                        MediaPlayer player = MediaPlayer.create(context, R.raw.ylzs);
                         player.setVolume(1.0f,1.0f);
                         player.start();
                         abortBroadcast();
-                        //哈啊
                     }else if ("#*wipedata*#".equals(body)){
                         Log.i(TAG,"远程清除数据");
                         dpm.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE);

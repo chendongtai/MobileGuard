@@ -1,6 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard;
+
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import cn.edu.gdmec.android.mobileguard.R;
+
 public class Setup4Activty extends BaseSetupActivity {
     private TextView mStatusTV;
     private ToggleButton mToggleButton;
@@ -58,5 +59,6 @@ public class Setup4Activty extends BaseSetupActivity {
             mToggleButton.setChecked(false);
         }
     }
+
 
 }

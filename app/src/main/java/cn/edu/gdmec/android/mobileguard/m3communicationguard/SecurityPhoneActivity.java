@@ -10,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import cn.edu.gdmec.android.mobileguard.R;
-import cn.edu.gdmec.android.mobileguard.m3communicationguard.adapter.BlackContactAdapter;
+import cn.edu.gdmec.android.mobileguard.m3communicationguard.adapter.BlackContactAdapte;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContactInfo;
 
@@ -28,15 +30,16 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
     private int pagesize = 4;
     private int totalNumber;
     private List<BlackContactInfo> pageBlackNumber = new ArrayList<BlackContactInfo>();
-    private BlackContactAdapter adapter;
+    private BlackContactAdapte adapter;
 
     private void fillData() {
 //        dao = new BlackNumberDao(SecurityPhoneActivity.this);
         totalNumber = dao.getTotalNumber();
         if (totalNumber == 0){
-            //数据库中没有黑名单数据a
+            //数据库中没有黑名单数据
             mHaveBlackNumber.setVisibility(View.GONE);
             mNoBlackNumber.setVisibility(View.VISIBLE);
+
         }else if (totalNumber > 0){
             //数据库中含有黑名单数据
             mHaveBlackNumber.setVisibility(View.VISIBLE);
@@ -47,8 +50,8 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
             }
             pageBlackNumber.addAll(dao.getPageBlackNumber(pagenumber,pagesize));
             if (adapter == null){
-                adapter = new BlackContactAdapter(pageBlackNumber,SecurityPhoneActivity.this);
-                adapter.setCallBack(new BlackContactAdapter.BlackContactCallBack(){
+                adapter = new BlackContactAdapte(pageBlackNumber,SecurityPhoneActivity.this);
+                adapter.setCallBack(new BlackContactAdapte.BlackConactCallBack() {
                     @Override
                     public void DataSizeChanged() {
                         fillData();
@@ -60,6 +63,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
             }
         }
     }
+
     private void initView() {
         findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.bright_purple));
         ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
@@ -76,6 +80,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
                 switch (i){ //i是列表的滚动状态
                     //SCROLL_STATE_FLING  列表滚动后静止
                     //SCROLL_STATE_TOUCH_SCROOL  列表滚动后静止
+
                     case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
                         //获取最后一个可见条目
                         int lastVisiblePosition = mListView.getLastVisiblePosition();
@@ -84,6 +89,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
                             pagenumber++;
                             if (pagenumber*pagesize >= totalNumber){
                                 Toast.makeText(SecurityPhoneActivity.this, "没有更多的数据了", Toast.LENGTH_LONG).show();
+
                             }else {
                                 pageBlackNumber.addAll(dao.getPageBlackNumber(pagenumber,pagesize));
                                 adapter.notifyDataSetChanged();
@@ -92,6 +98,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
                         break;
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
@@ -105,6 +112,8 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
         initView();
         fillData();
     }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -116,6 +125,7 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
                 break;
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();

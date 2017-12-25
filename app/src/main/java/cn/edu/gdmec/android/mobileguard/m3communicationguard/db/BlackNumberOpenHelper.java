@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Created by Administrator on 2017/11/4.
+ */
+
 public class BlackNumberOpenHelper extends SQLiteOpenHelper {
     private static String DB_NAME="my_info";
     private static int VERSION = 1;
@@ -23,11 +27,11 @@ public class BlackNumberOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table blacknumber"+
-                "(id integer primary key autoincrement,"+
+            "(id integer primary key autoincrement,"+
                 "number varchar(20),"+
                 "name varchar(255),"+
-                "type varchar(255),"+
-                "mode integer)"
+                "mode integer,"+
+                "type varchar(25))"
         );
     }
 

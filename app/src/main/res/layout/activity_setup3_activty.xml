@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
->
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="100"
         android:background="@android:color/white"
         android:orientation="vertical"
-    >
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
@@ -22,7 +22,7 @@
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/add"
-            />
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 android:text="选择安全联系人"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
-            />
+                />
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_margin="15dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-        >
+            >
             <EditText
                 android:id="@+id/et_inputphone"
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:textColorHint="@color/purple"
 
 
-            />
+                />
             <Button
                 android:id="@+id/btn_addcontact"
                 android:layout_width="55dp"
@@ -61,7 +61,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/add"
-            />
+                />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -70,7 +70,7 @@
         android:layout_weight="10"
         android:background="@color/purple"
         android:gravity="center"
-    >
+        >
         <include layout="@layout/setup_radiogroup"/>
 
     </LinearLayout>

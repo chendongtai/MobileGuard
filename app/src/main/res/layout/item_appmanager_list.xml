@@ -104,6 +104,7 @@
             android:drawableTop="@drawable/activityicon_yellow_n"
             android:text="活动"
             />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
 
-    >
+        >
         <TextView
             android:id="@+id/tv_phonememory_appmanager"
             style="@style/textview12sp"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:listSelector="@color/transparent"
-        />
+            />
         <TextView
             android:id="@+id/tv_appnumber"
             android:layout_width="match_parent"

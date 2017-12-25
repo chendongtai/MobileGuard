@@ -15,7 +15,7 @@ import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
  */
 
 public class EngineUtils {
-        /**
+        /*
         * 分享应用
         * */
     public static void shareApplication(Context context, AppInfo appInfo){
@@ -39,9 +39,9 @@ public class EngineUtils {
         }
 
     }
-    /**
+    /*
      * 开启应用设置页面
-     **/
+     * */
     public static void SettingAppDetail(Context context,AppInfo appInfo){
         Intent intent = new Intent();
         intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
@@ -68,22 +68,23 @@ public class EngineUtils {
                             "\nInstall time："+appInfo.installTime+
                                 "\nCertificate issuer："+appInfo.certifi+
                                     "\n\nPermissions："+appInfo.permisstion);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
-           @Override
-            public void onClick(DialogInterface dialogInterface, int i){
-               dialogInterface.dismiss();
-           }
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
         });
         AlertDialog dialog =  builder.create();
         dialog.show();
     }
-    public static void ActivityInfoDetail(Context context,AppInfo appInfo){
+
+    public static void ActivityInfoDetail(Context context, AppInfo appInfo) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(appInfo.appName);
         builder.setMessage("activities:"+appInfo.activityInfo);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i){
+            public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });

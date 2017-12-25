@@ -23,9 +23,7 @@
     <style name="textview16sp" parent="wrapcontent">
         <item name="android:textSize">16sp</item>
         <item name="android:gravity">center_vertical</item>
-
     </style>
-
     <!--手机防盗界面增加  2017.10.21-->
     <!--TextView 14sp样式-->
     <style name="textview14sp" parent="wrapcontent">
@@ -33,12 +31,6 @@
         <item name="android:gravity">center_vertical</item>
 
     </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <!--软件管家模块用到的 2017.11.5-->
     <style name="zero_widthwrapcontent">
         <item name="android:layout_width">0dp</item>

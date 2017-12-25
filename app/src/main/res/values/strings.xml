@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">MobileGuard</string>
-    <string name="title_activity_contact_select">ContactSelectActivity</string>
 </resources>

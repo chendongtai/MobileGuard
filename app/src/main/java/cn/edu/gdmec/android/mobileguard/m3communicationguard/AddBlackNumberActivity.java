@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.ContactSelectActivity;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
@@ -36,7 +34,7 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
         mTelCB = (CheckBox) findViewById(R.id.cb_blacknumber_tel);
         mNumET = (EditText) findViewById(R.id.et_blacknumber);
         mNameET = (EditText) findViewById(R.id.et_blackname);
-        mTypeET = (EditText) findViewById(R.id.et_blacknumbertype);
+        mTypeET = (EditText) findViewById(R.id.et_blacktype);
 
         findViewById(R.id.add_blacknum_btn).setOnClickListener(this);
         findViewById(R.id.add_fromcontact_btn).setOnClickListener(this);
@@ -49,10 +47,9 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
             //获取选中的联系人信息
             String phone = data.getStringExtra("phone");
             String name = data.getStringExtra("name");
-            String type = data.getStringExtra("type");
             mNameET.setText(name);
             mNumET.setText(phone);
-            mTypeET.setText(type);
+            mTypeET.setText("骚扰");
         }
     }
 
@@ -73,9 +70,9 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
             case R.id.add_blacknum_btn:
                 String number = mNumET.getText().toString().trim();
                 String name = mNameET.getText().toString().trim();
-                String type = mTypeET.getText().toString().trim();//trim是忽略字符串前后空白
-                if (TextUtils.isEmpty(number)||TextUtils.isEmpty(name)|| TextUtils.isEmpty(type)){
-                    Toast.makeText(this, "电话号码和手机号码不能为空！", Toast.LENGTH_LONG).show();
+                String type = mTypeET.getText().toString().trim();
+                if (TextUtils.isEmpty(number)||TextUtils.isEmpty(name)||TextUtils.isEmpty(type)){
+                    Toast.makeText(this, "电话号码和手机号码和类型不能为空！", Toast.LENGTH_LONG).show();
                     return;
                 }else {
                     //电话号码和名称都不为空
@@ -103,7 +100,7 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
                         Toast.makeText(this, "该号码已经被添加至黑名单", Toast.LENGTH_SHORT).show();
                     }
                     finish();
-
+                    
                 }
                 break;
             case R.id.add_fromcontact_btn:

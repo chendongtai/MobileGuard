@@ -1,7 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m4appmanager.adapter;
 
 import android.content.Context;
-import android.content.EntityIterator;
 import android.support.v4.content.ContextCompat;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -34,12 +33,14 @@ public class AppManagerAdapter extends BaseAdapter {
         this.UserAppInfos = UserAppInfos;
         this.SystemAppInfos = SystemAppInfos;
         this.context = context;
+
     }
     @Override
     public int getCount() {
         //因为有两个条目需要用于显示用户进程 系统进程因此需要加2
         return UserAppInfos.size()+SystemAppInfos.size()+2;
     }
+
     @Override
     public Object getItem(int i) {
         if(i ==0){
@@ -60,7 +61,7 @@ public class AppManagerAdapter extends BaseAdapter {
         return appInfo;
     }
 
-    @Override
+     @Override
     public long getItemId(int position) {
         return 0;
     }
@@ -100,7 +101,6 @@ public class AppManagerAdapter extends BaseAdapter {
             viewHolder.mUninstallTV = (TextView) view.findViewById(R.id.tv_uninstall_app);
             viewHolder.mAppOptionLL = (LinearLayout) view.findViewById(R.id.ll_option_app);
             viewHolder.mActivityInfo = (TextView) view.findViewById(R.id.tv_activityicon_app);
-
             view.setTag(viewHolder);
         }
         if (appInfo != null){
@@ -180,6 +180,7 @@ public class AppManagerAdapter extends BaseAdapter {
                     break;
                 case R.id.tv_activityicon_app:
                     EngineUtils.ActivityInfoDetail(context,appInfo);
+                    break;
             }
         }
     }

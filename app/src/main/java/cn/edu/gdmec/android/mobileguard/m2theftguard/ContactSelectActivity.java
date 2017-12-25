@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import java.util.List;
 
 import cn.edu.gdmec.android.mobileguard.R;
@@ -30,8 +29,12 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
             switch (msg.what){
                 case 10:
                     if (systemContacts != null){
+                        for (ContactInfo co:systemContacts) {
+                            Log.d("Tag", "run: -----name:"+co.name+"          phone :"+co.phone);
+                        }
                         adapter = new ContactAdapter(systemContacts,ContactSelectActivity.this);
                         mListView.setAdapter(adapter);
+                        Log.d("Tag", "handleMessage: ---------mListView.setAdapter(adapter);end");
                     }
                     break;
             }
@@ -45,7 +48,6 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initView() {
-        Log.d("Tag", "initView: ------------------------------ 选择联系人");
         ((TextView)findViewById(R.id.tv_title)).setText("选择联系人");
         ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
         mLeftImgv.setOnClickListener(this);
@@ -58,6 +60,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
             public void run() {
                 systemContacts = ContactInfoParser.getSystemContact(ContactSelectActivity.this);
                 systemContacts.addAll(ContactInfoParser.getSimContacts(ContactSelectActivity.this));
+
                 mHandler.sendEmptyMessage(10);
             }
         }.start();

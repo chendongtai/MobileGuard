@@ -73,11 +73,10 @@ public class GPSLocationService extends Service{
 
         }
     }
-   @Override
+    @Override
     public void onDestroy(){
-       super.onDestroy();
-       lm.removeUpdates(listener);
-       listener = null;
-   }
+        super.onDestroy();
+        lm.removeUpdates(listener);
+        listener = null;
+    }
 }
-

@@ -56,6 +56,8 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
         }
     };
 
+
+
     class UninstallRececiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -90,11 +92,11 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_manager);
-
         receciver = new UninstallRececiver();
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
         intentFilter.addDataScheme("package");
         registerReceiver(receciver,intentFilter);
+
         initView();
     }
 
@@ -104,6 +106,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
         ((TextView)findViewById(R.id.tv_title)).setText("软件管家");
         mLeftImagv.setOnClickListener(this);
         mLeftImagv.setImageResource(R.drawable.back);
+
         mPhoneMemoryTV = (TextView) findViewById(R.id.tv_phonememory_appmanager);
         mSDMemoryTV = (TextView) findViewById(R.id.tv_sdmemory_appmanager);
         mAppNumTV = (TextView) findViewById(R.id.tv_appnumber);
@@ -126,6 +129,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     private void getMemoryFromPhone(){
         long avail_sd = Environment.getExternalStorageDirectory().getFreeSpace();
         long avail_rom = Environment.getDataDirectory().getFreeSpace();
+
         String str_avail_sd = Formatter.formatFileSize(this,avail_sd);
         String str_avail_rom = Formatter.formatFileSize(this,avail_rom);
         mPhoneMemoryTV.setText("剩余手机内存"+str_avail_rom);
@@ -142,6 +146,12 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
                     new Thread(){
                         @Override
                         public void run() {
+                            if(position ==0){
+                                //第0个位置显示的应该是 用户程序的个数的标签
+                                return;
+                            }else if (position == (userAppInfos.size()+1)){
+                                return;
+                            }
                             AppInfo mappInfo = (AppInfo) adapter.getItem(position);
                             boolean flag = mappInfo.isSelected;
                             for (AppInfo appInfo : userAppInfos){
@@ -162,6 +172,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
                         }
                     }.start();
                 }
+
             }
         });
 
@@ -175,6 +186,8 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
             public void onScroll(AbsListView view, int i, int visibleItemCount, int totalItemCount) {
                 if(i >= userAppInfos.size()+1){
                     mAppNumTV.setText("系统程序："+systemAppInfos.size()+"个");
+
+
                 }else {
                     mAppNumTV.setText("用户程序："+userAppInfos.size()+"个");
                 }
